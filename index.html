@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J-Mart Supermarket</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f8f5;color:#25352d}
+header{background:#087f4e;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+header h1{margin:0}header input{padding:12px;border:0;border-radius:8px;max-width:350px;width:100%}
+button{cursor:pointer;border:0;border-radius:7px;padding:10px 14px}.banner{background:#dff3d8;padding:35px 5%;text-align:center}
+.banner h2{font-size:30px;color:#075b3b;margin:0 0 10px}.banner p{margin:0}main{padding:25px 5%}
+.section-title{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.products{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px}
+.card{background:white;border:1px solid #dce6df;border-radius:12px;padding:15px;text-align:center;box-shadow:0 2px 5px #0000000a}
+.product-image{width:100%;height:150px;object-fit:contain;background:#fff;border-radius:8px;margin-bottom:10px}
+.card h3{font-size:16px;margin:8px 0}.card p{color:#647269;font-size:13px;margin:7px}
+.price{font-size:19px;color:#087f4e;font-weight:bold;margin:12px}.add{background:#078754;color:white;width:100%;font-weight:bold}
+.add:hover{background:#05663f}.cart{background:white;border-radius:10px;padding:20px;margin-top:25px}
+.cart-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+footer{background:#064b32;color:white;text-align:center;padding:20px}
+@media(max-width:1000px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}main{padding:15px 3%}.card{padding:10px}.product-image{height:120px}.banner h2{font-size:24px}header{padding:15px}}
+</style>
+</head>
+<body>
+<header><h1>🛒 J-Mart</h1><input id="search" type="search" placeholder="Search groceries..." oninput="showProducts()"><button onclick="showCart()">🛒 Cart (<span id="count">0</span>)</button></header>
+<section class="banner"><h2>Your Daily Essentials, All in One Place!</h2><p>Fresh groceries • Quality products • Affordable prices</p></section>
+<main><div class="section-title"><h2>🏠 Household Essentials</h2><p>15 Products</p></div><div class="products" id="products"></div>
+<section class="cart" id="cart"><h2>🛒 Your Shopping Cart</h2><div id="cartItems">Your cart is empty.</div><h3>Total: ₹<span id="total">0</span></h3><button class="add" onclick="checkout()">Place Order</button></section></main>
+<footer><p>© 2026 J-Mart Supermarket</p><p>Fresh Needs, Happy Homes!</p></footer>
+<script>
+const items = [
+{name:"Sunflower Oil",size:"1 Litre",price:150,image:"images/sunflower-oil.svg"},
+{name:"Rice",size:"5 kg",price:300,image:"images/rice.svg"},
+{name:"Sugar",size:"1 kg",price:45,image:"images/sugar.svg"},
+{name:"Wheat Flour",size:"5 kg",price:220,image:"images/wheat-flour.svg"},
+{name:"Toor Dal",size:"1 kg",price:140,image:"images/toor-dal.svg"},
+{name:"Salt",size:"1 kg",price:25,image:"images/salt.svg"},
+{name:"Chilli Powder",size:"100 g",price:45,image:"images/chilli-powder.svg"},
+{name:"Tea Powder",size:"250 g",price:120,image:"images/tea.svg"},
+{name:"Coffee Powder",size:"100 g",price:100,image:"images/coffee.svg"},
+{name:"Milk",size:"500 ml",price:30,image:"images/milk.svg"},
+{name:"Potatoes",size:"1 kg",price:35,image:"images/potatoes.svg"},
+{name:"Onions",size:"1 kg",price:40,image:"images/onions.svg"},
+{name:"Tomatoes",size:"1 kg",price:35,image:"images/tomatoes.svg"},
+{name:"Bath Soap",size:"1 bar",price:40,image:"images/bath-soap.svg"},
+{name:"Detergent Powder",size:"1 kg",price:110,image:"images/detergent.svg"}
+];
+let cart=[];
+function showProducts(){const q=document.getElementById("search").value.toLowerCase();const list=items.filter(p=>p.name.toLowerCase().includes(q));document.getElementById("products").innerHTML=list.map(p=>`<div class="card"><img src="${p.image}" alt="${p.name}" class="product-image"><h3>${p.name}</h3><p>${p.size}</p><div class="price">₹${p.price}</div><button class="add" onclick="addToCart('${p.name}')">+ Add to Cart</button></div>`).join("")}
+function addToCart(name){const product=items.find(p=>p.name===name);const found=cart.find(p=>p.name===name);if(found)found.qty++;else cart.push({...product,qty:1});updateCart()}
+function changeQty(name,amount){const product=cart.find(p=>p.name===name);if(!product)return;product.qty+=amount;if(product.qty<=0)cart=cart.filter(p=>p.name!==name);updateCart()}
+function updateCart(){document.getElementById("count").textContent=cart.reduce((s,p)=>s+p.qty,0);document.getElementById("total").textContent=cart.reduce((s,p)=>s+p.price*p.qty,0);document.getElementById("cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cart-row"><span>${p.name}<br>₹${p.price} × ${p.qty}</span><span><button onclick="changeQty('${p.name}',-1)">−</button> ${p.qty} <button onclick="changeQty('${p.name}',1)">+</button></span></div>`).join(""):"Your cart is empty."}
+function showCart(){document.getElementById("cart").scrollIntoView({behavior:"smooth"})}
+function checkout(){if(!cart.length){alert("Please add products to your cart first!");return}alert("Demo order total: ₹"+cart.reduce((s,p)=>s+p.price*p.qty,0)+". Online ordering is not connected yet.")}
+showProducts();
+</script>
+</body></html>

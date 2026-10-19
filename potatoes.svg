@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="340" viewBox="0 0 300 340">
+    <rect width="300" height="340" rx="20" fill="#f4f8f2"/>
+    <ellipse cx="150" cy="315" rx="88" ry="10" fill="#dce6dc"/>
+    <path d="M150 105c-35-42-80-2-72 58 7 52 35 100 72 112 37-12 65-60 72-112 8-60-37-100-72-58z" fill="#c89b62" stroke="#8c5b2e" stroke-width="4"/>
+        <path d="M150 108q-8-38 18-48q4 26-18 48" fill="#43864a" stroke="#28663a" stroke-width="3"/>
+        <path d="M150 108q-35-28-52-7q25 26 52 7" fill="#65a95b" stroke="#28663a" stroke-width="3"/>
+        <text x="150" y="205" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">POTATOES</text>
+    <text x="150" y="332" font-size="10" text-anchor="middle" fill="#5b6b60">J-MART • SAMPLE PACKAGING</text>
+    </svg>
