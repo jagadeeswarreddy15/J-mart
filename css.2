@@ -1,0 +1,255 @@
+
+/* J-Mart Homepage Design */
+.jm-hero,
+.jm-categories,
+.jm-promo {
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.jm-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 38px 5%;
+  overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(120deg, #e6f8e9, #f8fff1);
+}
+
+.jm-hero-content {
+  flex: 1;
+}
+
+.jm-offer-tag,
+.jm-eyebrow {
+  color: #16833b;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.jm-hero h1 {
+  margin: 16px 0;
+  color: #173d25;
+  font-size: clamp(30px, 5vw, 52px);
+  line-height: 1.15;
+}
+
+.jm-hero-content > p {
+  color: #526557;
+  line-height: 1.7;
+}
+
+.jm-shop-btn,
+.jm-promo-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 13px 22px;
+  border-radius: 9px;
+  background: #16833b;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.jm-shop-btn:hover,
+.jm-promo-btn:hover {
+  background: #10652d;
+}
+
+.jm-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 22px;
+  color: #285b36;
+  font-size: 13px;
+}
+
+.jm-hero-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 36%;
+  min-height: 230px;
+}
+
+.jm-circle {
+  position: absolute;
+  width: min(230px, 90%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #c9ebc9;
+}
+
+.jm-grocery-emoji {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(85px, 13vw, 145px);
+}
+
+.jm-floating {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 5px 15px #0001;
+  font-size: 27px;
+}
+
+.jm-float-one { top: 12%; left: 4%; }
+.jm-float-two { top: 12%; right: 2%; }
+.jm-float-three { bottom: 5%; right: 8%; }
+
+.jm-categories {
+  max-width: 1200px;
+  margin: 35px auto;
+  padding: 0 18px;
+}
+
+.jm-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.jm-section-heading h2 {
+  margin: 7px 0 0;
+  color: #183b25;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.jm-view-all {
+  color: #16833b;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jm-category-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.jm-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 20px 8px;
+  border: 1px solid #e5eee6;
+  border-radius: 14px;
+  background: white;
+  color: #253c2b;
+  text-align: center;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.jm-category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px #173d2514;
+}
+
+.jm-category-icon {
+  display: grid;
+  place-items: center;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #edf8ed;
+  font-size: 32px;
+}
+
+.jm-category strong {
+  font-size: 14px;
+}
+
+.jm-category small {
+  color: #777;
+  font-size: 11px;
+}
+
+.jm-promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1164px;
+  margin: 35px auto;
+  padding: 25px 30px;
+  border-radius: 16px;
+  background: #f3f8ed;
+}
+
+.jm-promo h2 {
+  margin: 8px 0;
+  color: #183b25;
+}
+
+.jm-promo p:last-child {
+  margin-bottom: 0;
+  color: #617064;
+  line-height: 1.5;
+}
+
+.jm-promo-btn {
+  white-space: nowrap;
+}
+
+/* Mobile-friendly layout */
+@media (max-width: 650px) {
+  .jm-hero {
+    padding: 28px 20px;
+    gap: 5px;
+  }
+
+  .jm-hero-art {
+    flex-basis: 30%;
+    min-height: 160px;
+  }
+
+  .jm-circle {
+    width: 125px;
+  }
+
+  .jm-floating {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+
+  .jm-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jm-promo {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  .jm-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .jm-hero-art {
+    width: 100%;
+    align-self: center;
+  }
+}
