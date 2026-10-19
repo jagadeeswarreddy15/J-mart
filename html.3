@@ -1,0 +1,82 @@
+
+<!-- Customer Details and Order Form -->
+<section id="checkout" class="checkout">
+  <h2>Customer Details</h2>
+
+  <form id="orderForm">
+    <input
+      type="text"
+      id="customerName"
+      placeholder="Enter your name"
+      required
+    />
+
+    <input
+      type="tel"
+      id="customerPhone"
+      placeholder="Enter phone number"
+      pattern="[0-9]{10}"
+      maxlength="10"
+      required
+    />
+
+    <textarea
+      id="customerAddress"
+      placeholder="Enter delivery address"
+      required
+    ></textarea>
+
+    <button type="submit">Place Order</button>
+  </form>
+
+  <p id="orderMessage"></p>
+</section>
+
+<style>
+  .checkout {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #f5fff5;
+    border-radius: 12px;
+  }
+
+  .checkout input,
+  .checkout textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .checkout button {
+    width: 100%;
+    padding: 12px;
+    background: #16833b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  document.getElementById("orderForm").addEventListener(
+    "submit",
+    function (event) {
+      event.preventDefault();
+
+      const name =
+        document.getElementById("customerName").value.trim();
+
+      document.getElementById("orderMessage").textContent =
+        "Thank you, " + name +
+        "! Demo order submitted successfully.";
+
+      this.reset();
+    }
+  );
+</script>
