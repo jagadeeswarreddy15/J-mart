@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J-Mart | Login & Sign Up</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(135deg,#e8f8ed,#f7fff8);display:flex;align-items:center;justify-content:center;padding:18px;color:#222}
+.card{width:100%;max-width:420px;padding:30px 26px;background:#fff;border-radius:18px;box-shadow:0 12px 35px #0002;text-align:center}
+.logo{font-size:42px;margin-bottom:8px}
+h1{margin:0;color:#16833b;font-size:30px}
+.subtitle{margin:9px 0 24px;color:#666}
+.tabs{display:flex;gap:8px;margin-bottom:22px}
+.tab{flex:1;padding:12px;border:1px solid #16833b;border-radius:8px;background:#fff;color:#16833b;font-weight:bold;cursor:pointer}
+.tab.active{background:#16833b;color:#fff}
+.field{text-align:left;margin:14px 0}
+label{display:block;margin-bottom:7px;font-size:14px;font-weight:bold}
+input{width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;font-size:15px;outline-color:#16833b}
+.submit{width:100%;margin-top:12px;padding:13px;border:0;border-radius:8px;background:#16833b;color:#fff;font-size:16px;font-weight:bold;cursor:pointer}
+.submit:hover{background:#116b2f}
+#message{min-height:22px;margin:16px 0 0;font-size:14px;line-height:1.5;color:#16833b}
+.note{color:#777;font-size:12px;line-height:1.5;margin-top:18px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo" aria-hidden="true">🛒</div>
+  <h1>J-Mart</h1>
+  <p class="subtitle">Your everyday grocery store</p>
+  <div class="tabs" role="tablist" aria-label="Account options">
+    <button type="button" class="tab active" id="loginTab" role="tab" aria-selected="true">Login</button>
+    <button type="button" class="tab" id="signupTab" role="tab" aria-selected="false">Sign Up</button>
+  </div>
+  <form id="accountForm">
+    <div class="field" id="nameField" hidden>
+      <label for="fullName">Full name</label>
+      <input id="fullName" type="text" placeholder="Enter your name" autocomplete="name">
+    </div>
+    <div class="field">
+      <label for="email">Email address</label>
+      <input id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="At least 8 characters" minlength="8" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="submit" id="submitButton">Login</button>
+  </form>
+  <p id="message" role="status" aria-live="polite"></p>
+  <p class="note">Demo only: this page does not create real accounts or verify passwords. Do not enter a real password.</p>
+</main>
+<script>
+(() => {
+  const form = document.getElementById('accountForm');
+  const nameField = document.getElementById('nameField');
+  const fullName = document.getElementById('fullName');
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+  const message = document.getElementById('message');
+  const submitButton = document.getElementById('submitButton');
+  const loginTab = document.getElementById('loginTab');
+  const signupTab = document.getElementById('signupTab');
+  let mode = 'login';
+
+  function setMode(nextMode) {
+    mode = nextMode;
+    const signup = mode === 'signup';
+    nameField.hidden = !signup;
+    fullName.required = signup;
+    password.autocomplete = signup ? 'new-password' : 'current-password';
+    submitButton.textContent = signup ? 'Create Account' : 'Login';
+    loginTab.classList.toggle('active', !signup);
+    signupTab.classList.toggle('active', signup);
+    loginTab.setAttribute('aria-selected', String(!signup));
+    signupTab.setAttribute('aria-selected', String(signup));
+    message.textContent = '';
+  }
+
+  loginTab.addEventListener('click', () => setMode('login'));
+  signupTab.addEventListener('click', () => setMode('signup'));
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = fullName.value.trim();
+    if (mode === 'signup' && !name) {
+      message.textContent = 'Please enter your name.';
+      return;
+    }
+    if (password.value.length < 8) {
+      message.textContent = 'Password must be at least 8 characters.';
+      return;
+    }
+    message.textContent = mode === 'signup'
+      ? `Demo sign-up form completed for ${name}. Connect a secure backend for real accounts.`
+      : `Demo login form submitted for ${email.value.trim()}. Connect a secure backend to verify your account.`;
+    password.value = '';
+  });
+})();
+</script>
+</body>
+</html>
